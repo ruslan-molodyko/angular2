@@ -1,39 +1,43 @@
-/**
- * Created by admin on 13.03.2016.
- */
-
 var gulp = require('gulp'),
-    ts = require('gulp-typescript'),
-    clean = require('gulp-clean'),
-    livereload = require('gulp-livereload'),
-    express = require('express'),
-    tsProject = ts.createProject('tsconfig.json');
+    livereload = require('gulp-livereload');
 
-var server = express();
-server.use(express.static('./public'));
-server.use('/node_modules', express.static('./node_modules'));
+var PATHS = {
+    src: 'src/**/*.ts'
+};
 
-gulp.task('serve', function() {
-    server.listen(5000);
-    livereload.listen();
+gulp.task('clean', function (done) {
+    var del = require('del');
+    del(['dist'], done);
 });
 
-gulp.task('default', ['ts', 'serve'], function () {
-    gulp.watch(['./app/**/*', './public/index.html'], ['ts']);
-});
+gulp.task('ts2js', function () {
+    var typescript = require('gulp-typescript');
+        tscConfig = require('./tsconfig.json');
 
-gulp.task('clean-ts', function () {
-    return gulp.src('./public/app/**/*', {read: false})
-        .pipe(clean());
-});
+    var tsResult = gulp
+        .src([PATHS.src, 'node_modules/angular2/typings/browser.d.ts'])
+        .pipe(typescript(tscConfig.compilerOptions));
 
-gulp.task('ts', ['clean-ts'], function() {
-
-    gulp.src('./app/**/*')
-        .pipe(gulp.dest('./public/app'));
-
-    var tsResult = tsProject.src('./public/app')
-        .pipe(ts(tsProject));
-    tsResult.js.pipe(gulp.dest('./public/app'))
+    return tsResult.js.pipe(gulp.dest('dist'))
         .pipe(livereload());
 });
+
+gulp.task('play', ['ts2js'], function () {
+    var http = require('http'),
+        connect = require('connect'),
+        serveStatic = require('serve-static'),
+        open = require('open'),
+        port = 5000, app;
+
+    gulp.watch(PATHS.src, ['ts2js']);
+
+    app = connect()
+        .use(serveStatic(__dirname + '/dist'))
+        .use(serveStatic(__dirname + '/src'))
+        .use('/node_modules', serveStatic(__dirname + '/node_modules'));
+    http.createServer(app).listen(port, function () {
+        livereload.listen();
+    });
+});
+
+gulp.task('default', ['play']);

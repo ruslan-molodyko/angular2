@@ -1,5 +1,5 @@
-# Created by .ignore support plugin (hsz.mobi)
-node_modules
 .idea
 .git
-public/app
+node_modules
+npm-debug.log
+dist
