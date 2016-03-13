@@ -19,7 +19,7 @@ gulp.task('serve', function() {
 });
 
 gulp.task('default', ['ts', 'serve'], function () {
-    gulp.watch('app/**/*', ['ts']);
+    gulp.watch(['./app/**/*', './public/index.html'], ['ts']);
 });
 
 gulp.task('clean-ts', function () {

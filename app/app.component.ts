@@ -5,6 +5,7 @@ interface Hero {
     id: number;
 }
 
+
 @Component({
     selector: 'app',
     template: `
@@ -12,6 +13,7 @@ interface Hero {
         <input [(ngModel)]="hero.name">
         `
 })
+
 export class AppComponent {
     public hero: Hero = {
         name: 'Ruslan',
