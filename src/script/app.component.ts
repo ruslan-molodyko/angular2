@@ -1,33 +1,33 @@
 import {Component, OnInit} from 'angular2/core';
-import {Zippy} from './zippy.component';
-import {PageTitle} from './page-title.component';
-import {UserService} from './user.service';
-import {User} from './users';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {PageComponent} from './page.component'
+import {DashboardComponent} from './dashboard.component'
 
 @Component({
     selector: 'app',
-    templateUrl: 'template/app.html',
-    directives: [Zippy],
-    providers: [UserService]
+    template: `
+        <h1>{{title}}</h1>
+        <nav>
+            <a [routerLink]="['Page']">Page</a>
+            <a [routerLink]="['Dashboard']">Dashboard</a>
+        </nav>
+        <router-outlet></router-outlet>
+    `,
+    directives: [ROUTER_DIRECTIVES, PageComponent],
+    providers: [ROUTER_PROVIDERS]
 })
-
-export class App implements OnInit{
-    constructor(private _userService: UserService) {}
-    private users: User[];
-    public user: User;
-
-    getUsers() {
-        this._userService.getUsers().then(function(users) {
-            this.users = users;
-            this.getFirst();
-        }.bind(this));
+@RouteConfig([
+    {
+        path: '/page',
+        name: 'Page',
+        component: PageComponent,
+        useAsDefault: true
+    },
+    {
+        path: '/dashboard',
+        name: 'Dashboard',
+        component: DashboardComponent
     }
-
-    getFirst() {
-        this.user = this.users[0];
-    }
-
-    ngOnInit() {
-        this.getUsers();
-    }
+])
+export class App {
 }
