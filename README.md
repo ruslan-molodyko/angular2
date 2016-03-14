@@ -7,3 +7,4 @@
 * https://angular.io/docs/ts/latest/guide/architecture.html
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols
 * https://github.com/zenparsing/es-observable
+* https://developer.mozilla.org/en-US/docs/Web/Events
