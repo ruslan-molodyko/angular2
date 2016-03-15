@@ -1,33 +1,21 @@
 import {Component, OnInit} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
-import {PageComponent} from './page.component'
-import {DashboardComponent} from './dashboard.component'
+import {RouteConfig, RouteParams, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {UserListComponent} from './page/user-list.component'
+import {UserComponent} from './page/user.component'
+import {Title} from 'angular2/platform/browser';
 
+@RouteConfig([
+    {path: '/', name: 'UserList', component: UserListComponent, useAsDefault: true},
+    {path: '/user/:id', name: 'User', component: UserComponent}
+])
 @Component({
     selector: 'app',
-    template: `
-        <h1>{{title}}</h1>
-        <nav>
-            <a [routerLink]="['Page']">Page</a>
-            <a [routerLink]="['Dashboard']">Dashboard</a>
-        </nav>
-        <router-outlet></router-outlet>
-    `,
-    directives: [ROUTER_DIRECTIVES, PageComponent],
-    providers: [ROUTER_PROVIDERS]
+    templateUrl: 'template/app.html',
+    directives: [ROUTER_DIRECTIVES],
+    providers: [Title]
 })
-@RouteConfig([
-    {
-        path: '/page',
-        name: 'Page',
-        component: PageComponent,
-        useAsDefault: true
-    },
-    {
-        path: '/dashboard',
-        name: 'Dashboard',
-        component: DashboardComponent
-    }
-])
 export class App {
+    constructor(title:Title) {
+        title.setTitle('App');
+    }
 }
