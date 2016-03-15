@@ -1,3 +1,5 @@
-<div>
-    {{user?.name}}
+<div class="user-box" *ngIf="user">
+    <div class="user-box__title">
+        <span class="user-box__id">{{user?.id}}</span> - <span class="user-box__name">{{user?.name}}</span>
+    </div>
 </div>

@@ -10,7 +10,6 @@ import {User} from '../model/users';
     directives: [UserBox],
     providers: [UserService]
 })
-
 export class UserComponent implements OnInit{
     constructor(private _userService: UserService, private _routeParams:RouteParams) {}
     public user: User;

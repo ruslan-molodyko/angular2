@@ -4,7 +4,7 @@ export interface User {
 }
 
 export var users: User[] = [
-    {id: 1, name: "Ruslan"},
-    {id: 2, name: "Roma"},
-    {id: 3, name: "John"}
+    {id: 0, name: "Ruslan"},
+    {id: 1, name: "Roma"},
+    {id: 2, name: "John"}
 ];
