@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>Hero Form</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" class="form-control" required [(ngModel)]="user.name">
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" name="age" class="form-control" required [(ngModel)]="user.age">
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>

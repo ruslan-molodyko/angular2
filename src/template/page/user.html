@@ -1,1 +1,3 @@
-<user-box [user]="user"></user-box>
+<user-box *ngIf="user" [user]="user"></user-box>
+<hr>
+<user-form *ngIf="user"></user-form>
