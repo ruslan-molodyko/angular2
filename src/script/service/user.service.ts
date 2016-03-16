@@ -10,7 +10,7 @@ export class UserService {
     }
 
     getUser(id) {
-        return new Promise<User[]>(resolve =>
+        return new Promise<User>(resolve =>
                 setTimeout(()=>resolve(users[id]), 0)
         );
     }
