@@ -1,21 +1,29 @@
 <div class="container">
-    <h1>Hero Form</h1>
-    <form>
-        {{diagnostic}}
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input *ngIf="user" type="text" id="name" name="name" class="form-control" required [(ngModel)]="user.name">
-        </div>
-        <div class="form-group">
-            <label for="age">Age</label>
-            <input *ngIf="user" type="number" id="age" name="age" class="form-control" required [(ngModel)]="user.age">
-        </div>
-        <div class="form-group">
-            <label for="jobs">Hero Power</label>
-            <select *ngIf="user" id="jobs" class="form-control" required [(ngModel)]="user.job">
-                <option *ngFor="#j of jobs" [value]="j">{{j}}</option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-    </form>
+    <div [hidden]="submitted">
+        <h1>User Form</h1>
+        <form *ngIf="active" (ngSubmit)="newUser()" #userForm="ngForm">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input #name="ngForm" type="text" id="name" name="name" class="form-control" required [(ngModel)]="user.name" ngControl="name">
+                <div *ngIf="!name.valid && !name.pristine" class="alert alert-danger">The input is wrong</div>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input *ngIf="user" type="number" id="age" name="age" class="form-control" required [(ngModel)]="user.age" ngControl="age">
+            </div>
+            <div class="form-group">
+                <label for="jobs">Job</label>
+                <select *ngIf="user" id="jobs" class="form-control" required [(ngModel)]="user.job" ngControl="job">
+                    <option *ngFor="#j of jobs" [value]="j">{{j}}</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default" [disabled]="!userForm.form.valid">New user</button>
+        </form>
+    </div>
+    <div [hidden]="!submitted">
+        <div>User:</div>
+        <div>Name: {{user.name}}</div>
+        <div>Age: {{user.age}}</div>
+        <div>Job: {{user.job}}</div>
+    </div>
 </div>

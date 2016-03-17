@@ -10,18 +10,23 @@ import {jobs} from '../model/job';
     providers: [UserService]
 })
 export class UserForm implements OnInit{
-    public user: User;
+    public user: User = new User(0, 'Ruslan', 22, jobs[0]);
     @Input('id') id: number;
     public jobs:string[] = jobs;
 
     constructor(private _userService:UserService) {}
 
     ngOnInit() {
-        this._userService.getUser(this.id).then(user => this.user = user);
+        //this._userService.getUser(this.id).then(user => this.user = user);
     }
 
-    get diagnostic() {
-        return JSON.stringify(this.user);
-    }
+    active = true;
+    submitted = false;
 
+    newUser() {
+        this.submitted = true;
+        //this.user = new User(0, '', null, '');
+        this.active = false;
+        setTimeout(()=> this.active = true, 0);
+    }
 }
