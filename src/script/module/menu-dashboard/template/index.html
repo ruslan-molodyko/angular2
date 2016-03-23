@@ -1,0 +1,16 @@
+<link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+<link href='/assets/module/menu-dashboard/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+<nav class="menu">
+    <ul class="menu__wrapper">
+        <li class="menu__item menu__item--menu-nested" *ngFor="#item of list" [class.menu__item--active-hover]="item.active" [class.menu__item--active]="item.href != null && item.active">
+            <a class="menu__link" (click)="(item.href != null && !clearLinkedElement() && item.active = true) || item.active = !item.active"><i class="menu__icon fa {{ item.icon }}"></i> {{ item.name }} <i *ngIf="item.list" class="menu__icon--arrow fa fa-angle-down pull-right"></i></a>
+            <nav class="menu menu--nested" *ngIf="item.list">
+                <ul class="menu__wrapper">
+                    <li class="menu__item" *ngFor="#itemNested of item.list" [class.menu__item--active]="itemNested.active">
+                        <a class="menu__link" (click)="clearLinkedElement();itemNested.active = true"><i class="menu__icon fa {{itemNested.icon}}"></i> {{ itemNested.name }}</a>
+                    </li>
+                </ul>
+            </nav>
+        </li>
+    </ul>
+</nav>
