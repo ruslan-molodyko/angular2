@@ -11,3 +11,6 @@
 * http://artemdemo.me/blog/angular-2-%D0%BF%D1%80%D0%B8%D0%BC%D0%B5%D1%80%D1%8B-%D0%B8-%D1%83%D1%80%D0%BE%D0%BA%D0%B8/
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
 * http://schwarty.com/2015/12/22/angular2-relative-paths-for-templateurl-and-styleurls/
+
+# TODO
+* Add gulp task to moving assets from module to public dir and style, script preprocessors
