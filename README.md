@@ -13,6 +13,7 @@
 * http://schwarty.com/2015/12/22/angular2-relative-paths-for-templateurl-and-styleurls/
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements
 * http://www.2ality.com/2014/09/es6-modules-final.html
+* http://www.typescriptlang.org/Handbook
 
 # TODO
 * Add gulp task to moving assets from module to public dir and style, script preprocessors
