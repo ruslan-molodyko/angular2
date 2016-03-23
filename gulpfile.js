@@ -1,9 +1,33 @@
 var gulp = require('gulp'),
+    stylus = require('gulp-stylus'),
     livereload = require('gulp-livereload');
 
 var PATHS = {
-    src: 'src/**/*.ts'
+    src: 'src/**/*.ts',
+    assetsModule: './src/script/module/*/assets/**/*',
+    assetsModuleDist: './dist/modules/',
+    assetsModuleDistStylus: './dist/modules/**/*.styl'
 };
+
+gulp.task('move', ['clean-assets'], function () {
+    return gulp.src([PATHS.assetsModule])
+        .pipe(gulp.dest(PATHS.assetsModuleDist))
+        .pipe(livereload());
+});
+
+gulp.task('styles', ['move'], function() {
+    gulp.src([PATHS.assetsModuleDistStylus])
+        .pipe(stylus({compress : false}).on('error', function (err) {
+            console.log(err);
+        }))
+        .pipe(gulp.dest(PATHS.assetsModuleDist))
+        .pipe(livereload());
+});
+
+gulp.task('clean-assets', function (done) {
+    var del = require('del');
+    del([PATHS.assetsModuleDist], done);
+});
 
 gulp.task('clean', function (done) {
     var del = require('del');
@@ -22,7 +46,7 @@ gulp.task('ts2js', function () {
         .pipe(livereload());
 });
 
-gulp.task('play', ['ts2js'], function () {
+gulp.task('play', ['clean-assets', 'move', 'styles', 'ts2js'], function () {
     var http = require('http'),
         connect = require('connect'),
         serveStatic = require('serve-static'),
@@ -30,6 +54,7 @@ gulp.task('play', ['ts2js'], function () {
         port = 5000, app;
 
     gulp.watch(PATHS.src, ['ts2js']);
+    gulp.watch(PATHS.assetsModule, ['move', 'styles']);
 
     app = connect()
         .use(serveStatic(__dirname + '/dist'))

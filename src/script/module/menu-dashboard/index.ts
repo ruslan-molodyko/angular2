@@ -1,64 +1,37 @@
 import {Component, Input} from 'angular2/core';
 
+/**
+ * Menu item interface
+ */
+export interface MenuItems {
+    name: string;
+    icon: string;
+    active?: boolean;
+    href?: string;
+    list?: MenuItems[];
+}
+
 @Component({
     selector: 'menu-dashboard',
-    moduleId: module.id,
-    templateUrl: './template/index.html',
-    styleUrls: ['./style/main.css']
+    templateUrl: './modules/menu-dashboard/assets/template/index.html',
+    styleUrls: ['./modules/menu-dashboard/assets/style/main.css']
 })
 export class MenuDashboard {
-    list:any = [
-        {
-            name: "UI Element",
-            icon: 'fa-toggle-off',
-            active: true,
-            list: [
-                {
-                    name: 'Button',
-                    icon: 'fa-circle-o',
-                    href: '#'
-                },
-                {
-                    name: 'Dropdown',
-                    icon: 'fa-arrows-v',
-                    active: true,
-                    href: '#'
-                },
-                {
-                    name: 'Other element',
-                    icon: 'fa-flag-o',
-                    href: '#'
-                },
-            ]
-        },
-        {
-            name: 'Panel',
-            icon: 'fa-bookmark-o',
-            list: [
-                {
-                    name: 'Button',
-                    icon: 'fa-circle-o',
-                    href: '#'
-                },
-                {
-                    name: 'Dropdown',
-                    icon: 'fa-arrows-v',
-                    href: '#'
-                },
-                {
-                    name: 'Other element',
-                    icon: 'fa-flag-o',
-                    href: '#'
-                },
-            ]
-        },
-        {
-            name: 'Table',
-            icon: 'fa-table',
-            href: '#'
-        }
-    ];
 
+    /**
+     * List of menu items
+     */
+    @Input() list: MenuItems[];
+
+    /**
+     * Width of menu
+     * @type {string}
+     */
+    @Input() width:string = '300px';
+
+    /**
+     * Clear all active classes from all previous links
+     */
     clearLinkedElement() {
         for (let item of this.list) {
             if (item.list != null) {

@@ -4,9 +4,8 @@
     padding-left: 0;
     list-style: none;
     background-color: #2e2e2e;
-    background-image: url('/assets/module/menu-dashboard/img/bg-strips-light.png');
+    background-image: url('/modules/menu-dashboard/assets/img/bg-strips-light.png');
     background-repeat: repeat;
-    width: 300px;
 }
 
 .menu .menu .menu__wrapper{
