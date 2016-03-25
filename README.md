@@ -14,6 +14,7 @@
 * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements
 * http://www.2ality.com/2014/09/es6-modules-final.html
 * http://www.typescriptlang.org/Handbook
+* https://www.youtube.com/watch?v=y28iHRuAHnw&index=1&list=LLCpyp2bey57FzRknhRM1moA
 
 # TODO
 * Add gulp task to moving assets from module to public dir and style, script preprocessors
